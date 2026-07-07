@@ -45,25 +45,23 @@
   }
 
   /* ---------- Header hide on scroll down ---------- */
-  var header = document.getElementById('header');
+  var header = document.getElementById('siteHeader');
   var lastScroll = 0;
-
-  window.addEventListener('scroll', function () {
-    var current = window.scrollY;
-    if (header) {
-      if (current > lastScroll && current > 160) {
+  if (header) {
+    window.addEventListener('scroll', function () {
+      var current = window.scrollY;
+      if (current > lastScroll && current > 120) {
         header.classList.add('hide');
       } else {
         header.classList.remove('hide');
       }
-    }
-    lastScroll = current;
-  }, { passive: true });
+      lastScroll = current;
+    }, { passive: true });
+  }
 
   /* ---------- Active nav link on scroll ---------- */
   var sections = document.querySelectorAll('main section[id]');
-  var navLinks = document.querySelectorAll('[data-nav]');
-
+  var navLinks = document.querySelectorAll('.main-nav a, .mobile-nav a');
   var navObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
@@ -97,32 +95,28 @@
   var counterObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
-        animateCount(entry.target);
-        counterObserver.unobserve(entry.target);
+        var el = entry.target;
+        var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+        var duration = 1200;
+        var start = null;
+
+        function step(timestamp) {
+          if (!start) start = timestamp;
+          var progress = Math.min((timestamp - start) / duration, 1);
+          el.textContent = Math.floor(progress * target);
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          } else {
+            el.textContent = target;
+          }
+        }
+        requestAnimationFrame(step);
+        counterObserver.unobserve(el);
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.4 });
 
   counters.forEach(function (el) { counterObserver.observe(el); });
-
-  function animateCount(el) {
-    var target = parseInt(el.getAttribute('data-count'), 10) || 0;
-    var duration = 1200;
-    var start = null;
-
-    function step(timestamp) {
-      if (!start) start = timestamp;
-      var progress = Math.min((timestamp - start) / duration, 1);
-      var eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(eased * target);
-      if (progress < 1) {
-        requestAnimationFrame(step);
-      } else {
-        el.textContent = target;
-      }
-    }
-    requestAnimationFrame(step);
-  }
 
   /* ---------- Footer year ---------- */
   var yearEl = document.getElementById('year');
@@ -132,13 +126,11 @@
   var downloadBtn = document.getElementById('downloadBtn');
   if (downloadBtn) {
     downloadBtn.addEventListener('click', function () {
-      if (window.generateResumePDF) {
-        window.generateResumePDF();
+      if (typeof generateResumePDF === 'function') {
+        generateResumePDF();
       }
     });
   }
-
-
 
   /* ---------- Custom cursor ---------- */
   var cursor = document.getElementById('customCursor');
@@ -239,9 +231,6 @@
     });
   }
 
-
-
-
   /* ---------- Scroll-linked timeline packet ---------- */
   var timelineEl = document.querySelector('.timeline');
   var packetEl = document.getElementById('timelinePacket');
@@ -251,7 +240,6 @@
       var rect = timelineEl.getBoundingClientRect();
       var viewportH = window.innerHeight;
 
-      // Progress of the timeline through the viewport (0 = just entered, 1 = fully scrolled past)
       var start = viewportH * 0.85;
       var end = -rect.height + viewportH * 0.25;
       var total = start - end;
@@ -267,6 +255,4 @@
     window.addEventListener('resize', updatePacket);
     updatePacket();
   }
-
-
 })();

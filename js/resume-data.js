@@ -1,22 +1,44 @@
-// Centralized resume data — used by the PDF generator.
-// Edit this file to update both the website content reference and the downloadable PDF.
+// ============================================================
+// SINGLE SOURCE OF TRUTH — edit this file only.
+// Every change here automatically updates:
+//   1. The website (rendered live via js/render.js)
+//   2. The downloadable PDF (generated via js/resume-pdf.js)
+// ============================================================
+
 window.RESUME_DATA = {
   name: "Rohan Londhe",
   title: "Data Integration Engineer (MuleSoft)",
   location: "Bengaluru, India",
   email: "rlondhe4561@gmail.com",
-  phone: "+91 9819698374",
+  phone: "+91 98196 98374",
   linkedin: "www.linkedin.com/in/rohanlondhe",
+  linkedinUrl: "https://www.linkedin.com/in/rohanlondhe",
   trailblazer: "www.salesforce.com/trailblazer/rohan-londhe",
+  trailblazerUrl: "https://www.salesforce.com/trailblazer/rohan-londhe",
 
   summary: "Certified MuleSoft developer with over 6 years of experience designing and building robust API integrations. Expertise spans integrating platforms including Salesforce, SendGrid, and more. Passionate about leveraging MuleSoft to create seamless, efficient solutions that drive business success.",
 
+  // Add or remove skill chips freely. "group" controls the hover-highlight
+  // clustering on the site (chips in the same group light up together).
+  // Groups in use: "core", "platform", "ops" — reuse these or invent a new one.
   skills: [
-    "MuleSoft", "REST APIs", "DataWeave 2.0", "API Design", "Integration Design",
-    "API-Led Connectivity", "MUnit", "System Thinking", "Salesforce Health Cloud",
-    "HashiCorp Vault", "Splunk", "Event-driven Architecture", "Agentforce", "Anypoint Platform"
+    { name: "MuleSoft", group: "core" },
+    { name: "Anypoint Platform", group: "core" },
+    { name: "REST APIs", group: "core" },
+    { name: "DataWeave 2.0", group: "core" },
+    { name: "API Design", group: "core" },
+    { name: "API-Led Connectivity", group: "core" },
+    { name: "MUnit", group: "core" },
+    { name: "Integration Design", group: "core" },
+    { name: "System Thinking", group: "core" },
+    { name: "Salesforce Health Cloud", group: "platform" },
+    { name: "Agentforce", group: "platform" },
+    { name: "HashiCorp Vault", group: "ops" },
+    { name: "Splunk", group: "ops" },
+    { name: "Event-driven Architecture", group: "ops" }
   ],
 
+  // Newest experience first. Add a new object at the top of this array for a new job.
   experience: [
     {
       role: "Data Integration Engineer (MuleSoft)",
@@ -71,14 +93,89 @@ window.RESUME_DATA = {
     }
   ],
 
+  // "featured" certifications get the large badge-card treatment on the site.
+  // Non-featured ones render as small chips under "Superbadges".
+  // badgeImage: path to the badge artwork in assets/badges/ (leave "" to use a generated icon instead — used for status tiers like Agentblazer).
+  // verifyUrl: where the badge links to when clicked — defaults to your Trailblazer profile.
   certifications: [
-    { name: "Salesforce Certified MuleSoft Developer", date: "Jul 2020" },
-    { name: "Salesforce Certified MuleSoft Developer II", date: "Apr 2023" },
-    { name: "Salesforce Certified Agentforce Specialist", date: "Sep 2025" },
-    { name: "Superbadge: Apex for Agentforce", date: "" },
-    { name: "Superbadge: Advanced Flow for Agentforce", date: "" },
-    { name: "Superbadge: Agentforce Service", date: "" },
-    { name: "Superbadge: Prompt Builder Templates", date: "" },
-    { name: "Agentblazer Status - Legend", date: "2025 & 2026" }
+    {
+      name: "Salesforce Certified MuleSoft Developer II",
+      date: "Apr 2023",
+      featured: true,
+      badgeImage: "assets/badges/mulesoft-developer-ii.jpg",
+      verifyUrl: "https://www.salesforce.com/trailblazer/rohan-londhe"
+    },
+    {
+      name: "Salesforce Certified Agentforce Specialist",
+      date: "Sep 2025",
+      featured: true,
+      badgeImage: "assets/badges/agentforce-specialist.jpg",
+      verifyUrl: "https://www.salesforce.com/trailblazer/rohan-londhe"
+    },
+    {
+      name: "Salesforce Certified MuleSoft Developer",
+      date: "Jul 2020",
+      featured: true,
+      badgeImage: "assets/badges/mulesoft-developer.jpg",
+      verifyUrl: "https://www.salesforce.com/trailblazer/rohan-londhe"
+    },
+    {
+      name: "Agentblazer Legend",
+      date: "2025 & 2026",
+      featured: true,
+      badgeImage: "assets/badges/agentblazer-legend.jpg",
+      verifyUrl: "https://www.salesforce.com/trailblazer/rohan-londhe"
+    },
+    {
+      name: "Apex for Agentforce",
+      date: "",
+      featured: false,
+      badgeImage: "",
+      verifyUrl: "https://www.salesforce.com/trailblazer/rohan-londhe"
+    },
+    {
+      name: "Advanced Flow for Agentforce",
+      date: "",
+      featured: false,
+      badgeImage: "",
+      verifyUrl: "https://www.salesforce.com/trailblazer/rohan-londhe"
+    },
+    {
+      name: "Agentforce Service",
+      date: "",
+      featured: false,
+      badgeImage: "",
+      verifyUrl: "https://www.salesforce.com/trailblazer/rohan-londhe"
+    },
+    {
+      name: "Prompt Builder Templates",
+      date: "",
+      featured: false,
+      badgeImage: "",
+      verifyUrl: "https://www.salesforce.com/trailblazer/rohan-londhe"
+    }
+  ],
+
+  // Impact / case study cards shown between Experience and Skills.
+  // "value" + "suffix" drive the animated counting number (e.g. value: 30, suffix: "%").
+  caseStudies: [
+    {
+      tag: "Salesforce Health Cloud · HCP Onboarding",
+      value: 30,
+      suffix: "%",
+      metricLabel: "Reduction in lead creation & qualification time",
+      problem: "Manual HCP matching and lead qualification created bottlenecks in the pharmaceutical onboarding pipeline.",
+      approach: "Integrated IQVIA data directly into the HCP matching engine, automating lead generation and qualification logic within Salesforce CRM.",
+      result: "Cut manual qualification effort significantly while improving data accuracy across the onboarding lifecycle."
+    },
+    {
+      tag: "Security & Secrets Management",
+      value: 100,
+      suffix: "%",
+      metricLabel: "Migration from Secure Properties to HashiCorp Vault",
+      problem: "Legacy MuleSoft applications relied on Secure Properties, limiting enterprise-grade secrets governance.",
+      approach: "Built a custom AI-assisted migration utility to automate the transition of existing applications to HashiCorp Vault.",
+      result: "Improved the security posture of the entire integration landscape without manual, app-by-app rework."
+    }
   ]
 };
