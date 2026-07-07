@@ -9,7 +9,7 @@ window.RESUME_DATA = {
   name: "Rohan Londhe",
   title: "Data Integration Engineer (MuleSoft)",
   location: "Bengaluru, India",
-  email: "rlondhe4561@gmail.com",
+  email: "rohanlondhe.in@gmail.com",
   phone: "+91 98196 98374",
   linkedin: "www.linkedin.com/in/rohanlondhe",
   linkedinUrl: "https://www.linkedin.com/in/rohanlondhe",
