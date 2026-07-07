@@ -150,6 +150,13 @@
   /* ---------- Contact ---------- */
   var contactLinks = document.getElementById('contactLinks');
   if (contactLinks) {
+    var contactIcons = {
+      Email: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+      LinkedIn: '<svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 5a1.94 1.94 0 1 1-3.88 0 1.94 1.94 0 0 1 3.88 0zM3.5 8.5h3v12h-3zM9.5 8.5h3v1.8c.6-1 1.8-2 3.6-2 2.9 0 4.4 1.9 4.4 5v7.2h-3v-6.4c0-1.6-.6-2.7-2-2.7-1.1 0-1.8.8-2.1 1.6-.1.3-.1.7-.1 1.1v6.4h-3z"/></svg>',
+      Trailblazer: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 2l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 15.3l-5.2 2.8 1-5.8-4.3-4.1 5.9-.9z"/></svg>'
+    };
+    var arrowIcon = '<svg class="contact-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M9 7h8v8"/></svg>';
+
     var linkDefs = [
       { label: 'Email', value: data.email, href: 'mailto:' + data.email },
       { label: 'LinkedIn', value: data.linkedin, href: data.linkedinUrl || ('https://' + data.linkedin) },
@@ -160,11 +167,14 @@
       var a = document.createElement('a');
       a.className = 'contact-link';
       a.href = def.href;
-      if (def.label !== 'Email' && def.label !== 'Phone') {
+      if (def.label !== 'Email') {
         a.target = '_blank';
         a.rel = 'noopener noreferrer';
       }
-      a.innerHTML = '<span class="contact-label">' + def.label + '</span><span class="contact-value">' + def.value + '</span>';
+      a.innerHTML =
+        '<span class="contact-icon">' + (contactIcons[def.label] || '') + '</span>' +
+        '<span class="contact-text"><span class="contact-label">' + def.label + '</span><span class="contact-value">' + def.value + '</span></span>' +
+        arrowIcon;
       contactLinks.appendChild(a);
     });
   }
