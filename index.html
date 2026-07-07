@@ -19,6 +19,8 @@
 
 <div class="noise-overlay" aria-hidden="true"></div>
 
+<div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
+
 <header class="site-header" id="header">
   <div class="header-inner">
     <a href="#top" class="logo" aria-label="Rohan Londhe home">
@@ -47,7 +49,7 @@
       <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
       </button>
-      <button class="btn btn-primary btn-sm" id="downloadBtn">
+      <button class="btn btn-primary btn-sm magnetic" id="downloadBtn">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 21h16"/></svg>
         <span>Resume PDF</span>
       </button>
@@ -72,26 +74,82 @@
 
   <section class="hero" id="top">
     <div class="hero-bg" aria-hidden="true"></div>
-    <div class="container hero-inner">
-      <p class="eyebrow reveal">Data Integration Engineer · MuleSoft</p>
-      <h1 class="hero-title reveal">
-        Building resilient <span class="accent-text">integrations</span><br>
-        that connect enterprise systems.
-      </h1>
-      <p class="hero-sub reveal">
-        6+ years designing API-led MuleSoft solutions across Salesforce Health Cloud, pharmaceutical
-        and financial systems — turning fragile point-to-point integrations into scalable, reusable APIs.
-      </p>
-      <div class="hero-actions reveal">
-        <a href="#contact" class="btn btn-primary">Get in touch</a>
-        <a href="#experience" class="btn btn-ghost">View experience</a>
+    <div class="container hero-inner hero-grid">
+      <div class="hero-text">
+        <p class="eyebrow reveal">Data Integration Engineer · MuleSoft</p>
+        <h1 class="hero-title reveal" id="scrambleTitle">
+          <span class="scramble-line">Building resilient <span class="accent-text">integrations</span></span><br>
+          <span class="scramble-line">that connect enterprise systems.</span>
+        </h1>
+        <p class="hero-sub reveal">
+          6+ years designing API-led MuleSoft solutions across Salesforce Health Cloud, pharmaceutical
+          and financial systems — turning fragile point-to-point integrations into scalable, reusable APIs.
+        </p>
+        <div class="hero-actions reveal">
+          <a href="#contact" class="btn btn-primary magnetic">Get in touch</a>
+          <a href="#experience" class="btn btn-ghost magnetic">View experience</a>
+        </div>
+        <div class="hero-meta reveal">
+          <span>Bengaluru, India</span>
+          <span class="dot">•</span>
+          <span>MuleSoft Certified Developer I &amp; II</span>
+          <span class="dot">•</span>
+          <span>Agentforce Specialist</span>
+        </div>
       </div>
-      <div class="hero-meta reveal">
-        <span>Bengaluru, India</span>
-        <span class="dot">•</span>
-        <span>MuleSoft Certified Developer I &amp; II</span>
-        <span class="dot">•</span>
-        <span>Agentforce Specialist</span>
+
+      <div class="hero-visual reveal" aria-hidden="true">
+        <svg viewBox="0 0 380 380" class="flow-svg">
+          <!-- connecting lines -->
+          <line class="flow-line" x1="190" y1="190" x2="70" y2="70" />
+          <line class="flow-line" x1="190" y1="190" x2="310" y2="70" />
+          <line class="flow-line" x1="190" y1="190" x2="70" y2="310" />
+          <line class="flow-line" x1="190" y1="190" x2="310" y2="310" />
+          <line class="flow-line" x1="190" y1="190" x2="190" y2="30" />
+
+          <!-- traveling pulses -->
+          <circle class="flow-pulse" r="3.5" cx="190" cy="190">
+            <animateMotion dur="2.8s" repeatCount="indefinite" path="M190,190 L70,70" />
+          </circle>
+          <circle class="flow-pulse" r="3.5" cx="190" cy="190">
+            <animateMotion dur="3.4s" repeatCount="indefinite" begin="0.4s" path="M190,190 L310,70" />
+          </circle>
+          <circle class="flow-pulse" r="3.5" cx="190" cy="190">
+            <animateMotion dur="3.1s" repeatCount="indefinite" begin="0.8s" path="M190,190 L70,310" />
+          </circle>
+          <circle class="flow-pulse" r="3.5" cx="190" cy="190">
+            <animateMotion dur="2.6s" repeatCount="indefinite" begin="1.2s" path="M190,190 L310,310" />
+          </circle>
+          <circle class="flow-pulse" r="3.5" cx="190" cy="190">
+            <animateMotion dur="2.2s" repeatCount="indefinite" begin="0.2s" path="M190,190 L190,30" />
+          </circle>
+
+          <!-- hub -->
+          <circle cx="190" cy="190" r="26" class="flow-hub" />
+          <text x="190" y="195" class="flow-hub-label" text-anchor="middle">MuleSoft</text>
+
+          <!-- system nodes -->
+          <g class="flow-node">
+            <circle cx="70" cy="70" r="20" />
+            <text x="70" y="75" text-anchor="middle">SFDC</text>
+          </g>
+          <g class="flow-node">
+            <circle cx="310" cy="70" r="20" />
+            <text x="310" y="75" text-anchor="middle">Vault</text>
+          </g>
+          <g class="flow-node">
+            <circle cx="70" cy="310" r="20" />
+            <text x="70" y="315" text-anchor="middle">Splunk</text>
+          </g>
+          <g class="flow-node">
+            <circle cx="310" cy="310" r="20" />
+            <text x="310" y="315" text-anchor="middle">SendGrid</text>
+          </g>
+          <g class="flow-node">
+            <circle cx="190" cy="30" r="20" />
+            <text x="190" y="35" text-anchor="middle">API</text>
+          </g>
+        </svg>
       </div>
     </div>
     <div class="scroll-cue" aria-hidden="true"><span></span></div>
@@ -134,6 +192,21 @@
     </div>
   </section>
 
+  <section class="section" id="philosophy">
+    <div class="container philosophy-inner reveal">
+      <div class="section-label">
+        <span class="section-number">—</span>
+        <h2>How I Work</h2>
+      </div>
+      <blockquote class="philosophy-quote">
+        "Every integration is a promise between two systems that don't know each other.
+        My job is to make that promise reliable, observable, and boring in the best way —
+        so nobody has to think about it once it's live."
+      </blockquote>
+      <p class="philosophy-note">Currently exploring: AI-assisted MuleSoft tooling &amp; agentic workflows on Salesforce Agentforce.</p>
+    </div>
+  </section>
+
   <section class="section section-offset" id="experience">
     <div class="container">
       <div class="section-label reveal">
@@ -142,6 +215,9 @@
       </div>
 
       <div class="timeline">
+        <div class="timeline-packet" id="timelinePacket" aria-hidden="true">
+          <span class="packet-dot"></span>
+        </div>
 
         <article class="timeline-item reveal">
           <div class="timeline-marker"><span></span></div>
@@ -204,27 +280,59 @@
     </div>
   </section>
 
-  <section class="section" id="skills">
+  <section class="section" id="impact">
     <div class="container">
       <div class="section-label reveal">
         <span class="section-number">03</span>
+        <h2>Impact</h2>
+      </div>
+      <div class="case-grid">
+        <article class="case-card reveal">
+          <span class="case-tag">Salesforce Health Cloud · HCP Onboarding</span>
+          <div class="case-number"><span class="case-num" data-count="30">0</span><span class="case-suffix">%</span></div>
+          <p class="case-metric-label">Reduction in lead creation &amp; qualification time</p>
+          <div class="case-body">
+            <p><strong>Problem:</strong> Manual HCP matching and lead qualification created bottlenecks in the pharmaceutical onboarding pipeline.</p>
+            <p><strong>Approach:</strong> Integrated IQVIA data directly into the HCP matching engine, automating lead generation and qualification logic within Salesforce CRM.</p>
+            <p><strong>Result:</strong> Cut manual qualification effort significantly while improving data accuracy across the onboarding lifecycle.</p>
+          </div>
+        </article>
+
+        <article class="case-card reveal">
+          <span class="case-tag">Security &amp; Secrets Management</span>
+          <div class="case-number"><span class="case-num" data-count="100">0</span><span class="case-suffix">%</span></div>
+          <p class="case-metric-label">Migration from Secure Properties to HashiCorp Vault</p>
+          <div class="case-body">
+            <p><strong>Problem:</strong> Legacy MuleSoft applications relied on Secure Properties, limiting enterprise-grade secrets governance.</p>
+            <p><strong>Approach:</strong> Built a custom AI-assisted migration utility to automate the transition of existing applications to HashiCorp Vault.</p>
+            <p><strong>Result:</strong> Improved the security posture of the entire integration landscape without manual, app-by-app rework.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="skills">
+    <div class="container">
+      <div class="section-label reveal">
+        <span class="section-number">04</span>
         <h2>Skills</h2>
       </div>
       <div class="skills-grid reveal">
-        <div class="skill-chip">MuleSoft</div>
-        <div class="skill-chip">Anypoint Platform</div>
-        <div class="skill-chip">REST APIs</div>
-        <div class="skill-chip">DataWeave 2.0</div>
-        <div class="skill-chip">API Design</div>
-        <div class="skill-chip">API-Led Connectivity</div>
-        <div class="skill-chip">MUnit</div>
-        <div class="skill-chip">Integration Design</div>
-        <div class="skill-chip">System Thinking</div>
-        <div class="skill-chip">Salesforce Health Cloud</div>
-        <div class="skill-chip">HashiCorp Vault</div>
-        <div class="skill-chip">Splunk</div>
-        <div class="skill-chip">Event-driven Architecture</div>
-        <div class="skill-chip">Agentforce</div>
+        <div class="skill-chip" data-group="core">MuleSoft</div>
+        <div class="skill-chip" data-group="core">Anypoint Platform</div>
+        <div class="skill-chip" data-group="core">REST APIs</div>
+        <div class="skill-chip" data-group="core">DataWeave 2.0</div>
+        <div class="skill-chip" data-group="core">API Design</div>
+        <div class="skill-chip" data-group="core">API-Led Connectivity</div>
+        <div class="skill-chip" data-group="core">MUnit</div>
+        <div class="skill-chip" data-group="core">Integration Design</div>
+        <div class="skill-chip" data-group="core">System Thinking</div>
+        <div class="skill-chip" data-group="platform">Salesforce Health Cloud</div>
+        <div class="skill-chip" data-group="platform">Agentforce</div>
+        <div class="skill-chip" data-group="ops">HashiCorp Vault</div>
+        <div class="skill-chip" data-group="ops">Splunk</div>
+        <div class="skill-chip" data-group="ops">Event-driven Architecture</div>
       </div>
     </div>
   </section>
@@ -232,7 +340,7 @@
   <section class="section section-offset" id="certifications">
     <div class="container">
       <div class="section-label reveal">
-        <span class="section-number">04</span>
+        <span class="section-number">05</span>
         <h2>Certifications &amp; Education</h2>
       </div>
 
@@ -263,7 +371,7 @@
   <section class="section contact-section" id="contact">
     <div class="container contact-inner reveal">
       <div class="section-label">
-        <span class="section-number">05</span>
+        <span class="section-number">06</span>
         <h2>Contact</h2>
       </div>
       <p class="lead contact-lead">

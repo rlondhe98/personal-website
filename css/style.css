@@ -223,6 +223,11 @@ a, button, [role="button"], input, textarea, select {
     radial-gradient(50% 40% at 85% 75%, oklch(from var(--color-primary) l c h / 0.10), transparent 65%);
 }
 .hero-inner { max-width: var(--content-wide); position: relative; z-index: 1; }
+.hero-grid { display: grid; gap: var(--space-12); align-items: center; }
+@media (min-width: 980px) { .hero-grid { grid-template-columns: 1.1fr 0.9fr; } }
+.hero-text { min-width: 0; }
+.hero-visual { display: none; justify-self: center; }
+@media (min-width: 980px) { .hero-visual { display: block; } }
 .eyebrow {
   font-size: var(--text-sm); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
   color: var(--color-primary); margin-bottom: var(--space-5);
@@ -260,6 +265,22 @@ a, button, [role="button"], input, textarea, select {
 .timeline { position: relative; display: flex; flex-direction: column; gap: var(--space-12); }
 .timeline::before { content: ''; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 1px; background: var(--color-divider); }
 @media (min-width: 700px) { .timeline::before { left: 9px; } }
+
+.timeline-packet {
+  position: absolute; left: 7px; top: 8px; width: 1px; height: 0;
+  pointer-events: none; z-index: 2;
+}
+@media (min-width: 700px) { .timeline-packet { left: 9px; } }
+.packet-dot {
+  position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%);
+  width: 8px; height: 8px; border-radius: var(--radius-full);
+  background: var(--color-primary);
+  box-shadow: 0 0 0 4px oklch(from var(--color-primary) l c h / 0.18),
+              0 0 12px oklch(from var(--color-primary) l c h / 0.6);
+  opacity: 0; transition: opacity 0.3s ease;
+}
+.timeline-packet.visible .packet-dot { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .timeline-packet { display: none; } }
 .timeline-item { position: relative; padding-left: var(--space-10); }
 .timeline-marker { position: absolute; left: 0; top: 4px; width: 16px; height: 16px; border-radius: var(--radius-full); background: var(--color-surface); border: 2px solid var(--color-primary); display: grid; place-items: center; }
 .timeline-marker span { width: 6px; height: 6px; border-radius: var(--radius-full); background: var(--color-primary); }
@@ -354,3 +375,80 @@ a, button, [role="button"], input, textarea, select {
 .logo-mark .logo-hub { animation: hub-pulse 3s ease-in-out infinite; }
 @keyframes hub-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 @media (prefers-reduced-motion: reduce) { .logo-mark .logo-hub { animation: none; } }
+
+
+/* ---------- Integration flow visual (hero) ---------- */
+.flow-svg { width: 100%; max-width: 380px; height: auto; }
+.flow-line {
+  stroke: oklch(from var(--color-primary) l c h / 0.28);
+  stroke-width: 1.4;
+}
+.flow-pulse { fill: var(--color-primary); filter: drop-shadow(0 0 4px oklch(from var(--color-primary) l c h / 0.7)); }
+.flow-hub { fill: var(--color-primary); opacity: 0.14; stroke: var(--color-primary); stroke-width: 1.6; }
+.flow-hub-label {
+  font-family: var(--font-body); font-weight: 700; font-size: 11px; fill: var(--color-primary);
+}
+.flow-node circle { fill: var(--color-surface); stroke: var(--color-border); stroke-width: 1.4; }
+.flow-node text { font-family: var(--font-body); font-size: 9.5px; font-weight: 600; fill: var(--color-text-muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  .flow-pulse { display: none; }
+}
+
+/* ---------- Custom cursor ---------- */
+.custom-cursor {
+  position: fixed; top: 0; left: 0; width: 20px; height: 20px;
+  border: 1.4px solid var(--color-primary); border-radius: var(--radius-full);
+  pointer-events: none; z-index: 999; transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+  mix-blend-mode: difference;
+  opacity: 0;
+}
+.custom-cursor.active { opacity: 1; }
+.custom-cursor.hover { width: 40px; height: 40px; background: oklch(from var(--color-primary) l c h / 0.15); }
+@media (hover: none), (pointer: coarse) {
+  .custom-cursor { display: none; }
+}
+
+/* ---------- Magnetic buttons ---------- */
+.magnetic { position: relative; will-change: transform; }
+
+/* ---------- Philosophy section ---------- */
+.philosophy-inner { max-width: var(--content-narrow); text-align: left; }
+.philosophy-quote {
+  font-family: var(--font-display); font-size: var(--text-lg); font-weight: 500;
+  line-height: 1.5; color: var(--color-text); border-left: none;
+  padding: 0; margin-block: var(--space-2) var(--space-6);
+  font-style: italic;
+}
+.philosophy-note { font-size: var(--text-sm); color: var(--color-text-faint); }
+
+/* ---------- Case study cards ---------- */
+.case-grid { display: grid; gap: var(--space-6); }
+@media (min-width: 800px) { .case-grid { grid-template-columns: 1fr 1fr; } }
+.case-card {
+  padding: var(--space-8); border-radius: var(--radius-xl);
+  background: var(--color-surface); border: 1px solid var(--color-border);
+  display: flex; flex-direction: column;
+}
+.case-tag {
+  font-size: var(--text-xs); font-weight: 600; color: var(--color-primary);
+  text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: var(--space-4);
+}
+.case-number { display: flex; align-items: baseline; gap: var(--space-1); margin-bottom: var(--space-1); }
+.case-num, .case-suffix { font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 700; color: var(--color-text); }
+.case-metric-label { font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-5); }
+.case-body { display: flex; flex-direction: column; gap: var(--space-3); border-top: 1px solid var(--color-divider); padding-top: var(--space-5); }
+.case-body p { font-size: var(--text-sm); color: var(--color-text-muted); }
+.case-body strong { color: var(--color-text); font-weight: 600; }
+
+/* ---------- Skill chip connection highlighting ---------- */
+.skill-chip { cursor: default; }
+.skills-grid.connecting .skill-chip { opacity: 0.35; }
+.skills-grid.connecting .skill-chip.chip-active,
+.skills-grid.connecting .skill-chip.chip-related { opacity: 1; }
+.skill-chip.chip-active { border-color: var(--color-primary); background: var(--color-primary-highlight); }
+.skill-chip.chip-related { border-color: oklch(from var(--color-primary) l c h / 0.5); }
+
+/* ---------- Scramble text ---------- */
+.scramble-line { display: inline-block; }

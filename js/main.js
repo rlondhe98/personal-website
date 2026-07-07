@@ -93,7 +93,7 @@
   revealEls.forEach(function (el) { revealObserver.observe(el); });
 
   /* ---------- Animated counters ---------- */
-  var counters = document.querySelectorAll('.stat-num');
+  var counters = document.querySelectorAll('.stat-num, .case-num');
   var counterObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
@@ -137,5 +137,136 @@
       }
     });
   }
+
+
+
+  /* ---------- Custom cursor ---------- */
+  var cursor = document.getElementById('customCursor');
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
+  if (cursor && !reduceMotion && !isTouch) {
+    window.addEventListener('mousemove', function (e) {
+      cursor.classList.add('active');
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    document.addEventListener('mouseleave', function () { cursor.classList.remove('active'); });
+
+    var hoverTargets = document.querySelectorAll('a, button, .skill-chip, .case-card');
+    hoverTargets.forEach(function (el) {
+      el.addEventListener('mouseenter', function () { cursor.classList.add('hover'); });
+      el.addEventListener('mouseleave', function () { cursor.classList.remove('hover'); });
+    });
+  }
+
+  /* ---------- Magnetic buttons ---------- */
+  if (!reduceMotion && !isTouch) {
+    document.querySelectorAll('.magnetic').forEach(function (btn) {
+      btn.addEventListener('mousemove', function (e) {
+        var rect = btn.getBoundingClientRect();
+        var relX = e.clientX - rect.left - rect.width / 2;
+        var relY = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = 'translate(' + (relX * 0.25) + 'px, ' + (relY * 0.35) + 'px)';
+      });
+      btn.addEventListener('mouseleave', function () {
+        btn.style.transform = 'translate(0, 0)';
+      });
+    });
+  }
+
+  /* ---------- Hero text scramble effect ---------- */
+  var scrambleLines = document.querySelectorAll('.scramble-line');
+  var scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz{}[]/\\<>*&%$#@';
+
+  function scrambleText(el, finalHTML) {
+    var finalText = el.textContent;
+    var length = finalText.length;
+    var frame = 0;
+    var totalFrames = 18;
+    var interval = setInterval(function () {
+      var output = '';
+      for (var i = 0; i < length; i++) {
+        if (i < (frame / totalFrames) * length) {
+          output += finalText[i];
+        } else if (finalText[i] === ' ') {
+          output += ' ';
+        } else {
+          output += scrambleChars[Math.floor(Math.random() * scrambleChars.length)];
+        }
+      }
+      el.textContent = output;
+      frame++;
+      if (frame > totalFrames) {
+        clearInterval(interval);
+        el.innerHTML = finalHTML;
+      }
+    }, 35);
+  }
+
+  if (scrambleLines.length && !reduceMotion) {
+    window.addEventListener('load', function () {
+      scrambleLines.forEach(function (line, idx) {
+        var originalHTML = line.innerHTML;
+        setTimeout(function () {
+          scrambleText(line, originalHTML);
+        }, idx * 500);
+      });
+    });
+  }
+
+  /* ---------- Skill chip connection highlighting ---------- */
+  var skillsGrid = document.querySelector('.skills-grid');
+  if (skillsGrid) {
+    var chips = skillsGrid.querySelectorAll('.skill-chip');
+    chips.forEach(function (chip) {
+      chip.addEventListener('mouseenter', function () {
+        var group = chip.getAttribute('data-group');
+        skillsGrid.classList.add('connecting');
+        chip.classList.add('chip-active');
+        chips.forEach(function (other) {
+          if (other !== chip && other.getAttribute('data-group') === group) {
+            other.classList.add('chip-related');
+          }
+        });
+      });
+      chip.addEventListener('mouseleave', function () {
+        skillsGrid.classList.remove('connecting');
+        chips.forEach(function (other) {
+          other.classList.remove('chip-active', 'chip-related');
+        });
+      });
+    });
+  }
+
+
+
+
+  /* ---------- Scroll-linked timeline packet ---------- */
+  var timelineEl = document.querySelector('.timeline');
+  var packetEl = document.getElementById('timelinePacket');
+
+  if (timelineEl && packetEl && !reduceMotion) {
+    var updatePacket = function () {
+      var rect = timelineEl.getBoundingClientRect();
+      var viewportH = window.innerHeight;
+
+      // Progress of the timeline through the viewport (0 = just entered, 1 = fully scrolled past)
+      var start = viewportH * 0.85;
+      var end = -rect.height + viewportH * 0.25;
+      var total = start - end;
+      var current = start - rect.top;
+      var progress = Math.min(Math.max(current / total, 0), 1);
+
+      var height = rect.height * progress;
+      packetEl.style.height = height + 'px';
+      packetEl.classList.toggle('visible', rect.top < viewportH && rect.bottom > 0);
+    };
+
+    window.addEventListener('scroll', updatePacket, { passive: true });
+    window.addEventListener('resize', updatePacket);
+    updatePacket();
+  }
+
 
 })();
