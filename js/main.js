@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-  /* ---------- Theme toggle ---------- */
   var root = document.documentElement;
   var toggle = document.querySelector('[data-theme-toggle]');
   var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -25,7 +24,6 @@
     });
   }
 
-  /* ---------- Mobile nav ---------- */
   var navToggle = document.getElementById('navToggle');
   var mobileNav = document.getElementById('mobileNav');
 
@@ -44,7 +42,6 @@
     });
   }
 
-  /* ---------- Header hide on scroll down ---------- */
   var header = document.getElementById('siteHeader');
   var lastScroll = 0;
   if (header) {
@@ -59,7 +56,6 @@
     }, { passive: true });
   }
 
-  /* ---------- Active nav link on scroll ---------- */
   var sections = document.querySelectorAll('main section[id]');
   var navLinks = document.querySelectorAll('.main-nav a, .mobile-nav a');
   var navObserver = new IntersectionObserver(function (entries) {
@@ -75,7 +71,6 @@
 
   sections.forEach(function (s) { navObserver.observe(s); });
 
-  /* ---------- Reveal on scroll ---------- */
   var revealEls = document.querySelectorAll('.reveal');
   var revealObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry, i) {
@@ -90,7 +85,6 @@
 
   revealEls.forEach(function (el) { revealObserver.observe(el); });
 
-  /* ---------- Animated counters ---------- */
   var counters = document.querySelectorAll('.stat-num, .case-num');
   var counterObserver = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
@@ -118,11 +112,9 @@
 
   counters.forEach(function (el) { counterObserver.observe(el); });
 
-  /* ---------- Footer year ---------- */
   var yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 
-  /* ---------- Download resume PDF ---------- */
   var downloadBtn = document.getElementById('downloadBtn');
   if (downloadBtn) {
     downloadBtn.addEventListener('click', function () {
@@ -132,7 +124,6 @@
     });
   }
 
-  /* ---------- Custom cursor ---------- */
   var cursor = document.getElementById('customCursor');
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var isTouch = window.matchMedia('(hover: none), (pointer: coarse)').matches;
@@ -152,7 +143,6 @@
     });
   }
 
-  /* ---------- Magnetic buttons ---------- */
   if (!reduceMotion && !isTouch) {
     document.querySelectorAll('.magnetic').forEach(function (btn) {
       btn.addEventListener('mousemove', function (e) {
@@ -167,7 +157,6 @@
     });
   }
 
-  /* ---------- Hero text scramble effect ---------- */
   var scrambleLines = document.querySelectorAll('.scramble-line');
   var scrambleChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz{}[]/\\<>*&%$#@';
 
@@ -207,7 +196,6 @@
     });
   }
 
-  /* ---------- Skill chip connection highlighting ---------- */
   var skillsGrid = document.querySelector('.skills-grid');
   if (skillsGrid) {
     var chips = skillsGrid.querySelectorAll('.skill-chip');
@@ -231,7 +219,6 @@
     });
   }
 
-  /* ---------- Scroll-linked timeline packet ---------- */
   var timelineEl = document.querySelector('.timeline');
   var packetEl = document.getElementById('timelinePacket');
 

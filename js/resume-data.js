@@ -18,9 +18,6 @@ window.RESUME_DATA = {
 
   summary: "Certified MuleSoft developer with over 6 years of experience designing and building robust API integrations. Expertise spans integrating platforms including Salesforce, SendGrid, and more. Passionate about leveraging MuleSoft to create seamless, efficient solutions that drive business success.",
 
-  // Add or remove skill chips freely. "group" controls the hover-highlight
-  // clustering on the site (chips in the same group light up together).
-  // Groups in use: "core", "platform", "ops" — reuse these or invent a new one.
   skills: [
     { name: "MuleSoft", group: "core" },
     { name: "Anypoint Platform", group: "core" },
@@ -38,7 +35,6 @@ window.RESUME_DATA = {
     { name: "Event-driven Architecture", group: "ops" }
   ],
 
-  // Newest experience first. Add a new object at the top of this array for a new job.
   experience: [
     {
       role: "Data Integration Engineer (MuleSoft)",
@@ -93,10 +89,6 @@ window.RESUME_DATA = {
     }
   ],
 
-  // "featured" certifications get the large badge-card treatment on the site.
-  // Non-featured ones render as small chips under "Superbadges".
-  // badgeImage: path to the badge artwork in assets/badges/ (leave "" to use a generated icon instead — used for status tiers like Agentblazer).
-  // verifyUrl: where the badge links to when clicked — defaults to your Trailblazer profile.
   certifications: [
     {
       name: "Salesforce Certified MuleSoft Developer II",
@@ -156,8 +148,6 @@ window.RESUME_DATA = {
     }
   ],
 
-  // Impact / case study cards shown between Experience and Skills.
-  // "value" + "suffix" drive the animated counting number (e.g. value: 30, suffix: "%").
   caseStudies: [
     {
       tag: "Salesforce Health Cloud · HCP Onboarding",

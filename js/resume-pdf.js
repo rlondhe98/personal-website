@@ -54,7 +54,6 @@ function generateResumePDF() {
     y += 16;
   }
 
-  /* ---------- Header ---------- */
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(24);
   setColor(colorText);
@@ -76,7 +75,6 @@ function generateResumePDF() {
 
   drawDivider();
 
-  /* ---------- Summary ---------- */
   if (data.summary) {
     sectionHeading('Summary');
     doc.setFont('helvetica', 'normal');
@@ -87,7 +85,6 @@ function generateResumePDF() {
     y += summaryLines.length * 13 + 14;
   }
 
-  /* ---------- Experience ---------- */
   sectionHeading('Experience');
   data.experience.forEach(function (job) {
     checkPageBreak(60);
@@ -121,7 +118,6 @@ function generateResumePDF() {
     y += 10;
   });
 
-  /* ---------- Skills ---------- */
   checkPageBreak(50);
   sectionHeading('Skills');
   doc.setFont('helvetica', 'normal');
@@ -133,7 +129,6 @@ function generateResumePDF() {
   doc.text(skillLines, margin, y);
   y += skillLines.length * 13 + 14;
 
-  /* ---------- Certifications ---------- */
   checkPageBreak(50);
   sectionHeading('Certifications');
   doc.setFont('helvetica', 'normal');
@@ -151,7 +146,6 @@ function generateResumePDF() {
   });
   y += 6;
 
-  /* ---------- Education ---------- */
   checkPageBreak(50);
   sectionHeading('Education');
   data.education.forEach(function (edu) {
