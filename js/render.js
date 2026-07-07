@@ -152,7 +152,6 @@
   if (contactLinks) {
     var linkDefs = [
       { label: 'Email', value: data.email, href: 'mailto:' + data.email },
-      { label: 'Phone', value: data.phone, href: 'tel:' + (data.phone || '').replace(/\s+/g, '') },
       { label: 'LinkedIn', value: data.linkedin, href: data.linkedinUrl || ('https://' + data.linkedin) },
       { label: 'Trailblazer', value: data.trailblazer, href: data.trailblazerUrl || ('https://' + data.trailblazer) }
     ];
