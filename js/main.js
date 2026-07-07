@@ -153,7 +153,7 @@
     });
     document.addEventListener('mouseleave', function () { cursor.classList.remove('active'); });
 
-    var hoverTargets = document.querySelectorAll('a, button, .skill-chip, .case-card');
+    var hoverTargets = document.querySelectorAll('a, button, .skill-chip, .case-card, .badge-card, .badge-chip');
     hoverTargets.forEach(function (el) {
       el.addEventListener('mouseenter', function () { cursor.classList.add('hover'); });
       el.addEventListener('mouseleave', function () { cursor.classList.remove('hover'); });
